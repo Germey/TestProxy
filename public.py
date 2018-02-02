@@ -2,10 +2,11 @@ import requests
 import time
 import numpy as np
 from requests.exceptions import ProxyError, ConnectTimeout, ReadTimeout, SSLError, ConnectionError
+import re
 
 test_url = 'https://www.baidu.com/'
 timeout = 60
-count = 500
+max = 500
 
 
 def get_page(url):
@@ -18,6 +19,12 @@ def get_page(url):
             return True, response.text
     except ConnectionError:
         return False, None
+
+
+def is_proxy(proxy):
+    if re.match('\d+\.\d+\.\d+\.\d+\:\d+', proxy):
+        return True
+    return False
 
 
 def test_proxy(proxy):
@@ -37,9 +44,11 @@ def test_proxy(proxy):
 
 
 def stats_result(used_time_list, valid_count, total_count):
+    if not used_time_list or not total_count:
+        return
     used_time_array = np.asarray(used_time_list, np.float32)
-    print('Used Time Mean:', used_time_array.mean(),
-          'Used Time Var', used_time_array.var(),
+    print('Total Count:', total_count,
           'Valid Count:', valid_count,
-          'Total Count:', total_count,
-          'Valid Percent: %.2f%%' % (valid_count * 100.0 / total_count))
+          'Valid Percent: %.2f%%' % (valid_count * 100.0 / total_count),
+          'Used Time Mean:', used_time_array.mean(),
+          'Used Time Var', used_time_array.var())
