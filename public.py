@@ -27,16 +27,17 @@ def is_proxy(proxy):
     return False
 
 
-def test_proxy(proxy):
+def test_proxy(proxy=None, proxies=None):
     try:
-        proxies = {
-            'https': 'http://' + proxy
-        }
+        if not proxies:
+            proxies = {
+                'https': 'http://' + proxy
+            }
         start_time = time.time()
         requests.get(test_url, timeout=timeout, proxies=proxies)
         end_time = time.time()
         used_time = end_time - start_time
-        print('Proxy Valid:', proxy, 'Used Time:', used_time)
+        print('Proxy Valid', 'Used Time:', used_time)
         return True, used_time
     except (ProxyError, ConnectTimeout, SSLError, ReadTimeout, ConnectionError):
         print('Proxy Invalid:', proxy)

@@ -17,11 +17,10 @@ def main():
             if is_proxy(proxy):
                 total_count += 1
                 print('Testing proxy', proxy)
-                test_flag, test_result = test_proxy(proxy)
+                test_flag, test_result = test_proxy(proxy=proxy)
                 if test_flag:
                     valid_count += 1
                     used_time_list.append(test_result)
-                print(used_time_list, valid_count, total_count)
                 stats_result(used_time_list, valid_count, total_count)
         time.sleep(wait)
         if total_count == max:
