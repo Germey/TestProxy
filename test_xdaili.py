@@ -1,12 +1,12 @@
 from public import get_page, test_proxy, max, stats_result, is_proxy
 import time
 
-api_url = 'http://dec.ip3366.net/api/?key=20180202220426620&getnum=1&proxytype=0'
-wait = 2
+api_url = 'http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=da289b78fec24f19b392e04106253f2a&orderno=YZ2018223246g0SAwH&returnType=1&count=1'
+wait = 6
 
 
 def main():
-    print('Testing yun proxy')
+    print('Testing xdaili')
     used_time_list = []
     valid_count = 0
     total_count = 0

@@ -6,7 +6,7 @@ wait = 10
 
 
 def main():
-    print('Testing goubanjia normal')
+    print('Testing goubanjia dynamic')
     used_time_list = []
     valid_count = 0
     total_count = 0
